@@ -1,0 +1,21 @@
+odf:
+  enabled: true
+  storage: false
+  s3: true
+
+virt:
+  enabled: true
+
+localStorage:
+  enabled: true
+
+nmstate:
+  enabled: true
+  vm:
+    enabled: true
+    baseInterface: bond0
+    vlanId: 7
+    vlanName: vm
+
+nodehealth:
+  enabled: true

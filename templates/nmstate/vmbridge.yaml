@@ -1,0 +1,22 @@
+{{ if .Values.nmstate.vm.enabled }}
+---
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: vm
+spec:
+  desiredState:
+    interfaces:
+      - bridge:
+          options:
+            stp:
+              enabled: false
+          port:
+            - name: {{ .Values.nmstate.vm.baseInterface }}
+        name: {{ .Values.nmstate.vm.baseInterface }}.{{ .Values.nmstate.vm.vlanId }}
+        state: up
+        type: linux-bridge
+    ovn:
+      bridge-mappings: []
+---
+{{ end }}

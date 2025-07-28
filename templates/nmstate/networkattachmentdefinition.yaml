@@ -1,0 +1,17 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: {{ .Values.nmstate.vm.vlanName }}
+  namespace: default
+spec:
+  config: |-
+    {
+        "cniVersion": "0.3.1",
+        "name": "{{ .Values.nmstate.vm.vlanName }}",
+        "type": "bridge",
+        "bridge": "{{ .Values.nmstate.vm.baseInterface }}.{{ .Values.nmstate.vm.vlanId }}",
+        "ipam": {},
+        "macspoofchk": true,
+        "preserveDefaultVlan": false,
+        "vlan": {{ .Values.nmstate.vm.vlanId }}
+    }
