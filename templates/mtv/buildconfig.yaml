@@ -1,0 +1,30 @@
+{{ if .Values.mtv.enabled }}
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  namespace: openshift-mtv
+  name: vddk-build
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: vddk-build:latest
+  source:
+    type: Dockerfile
+    dockerfile: |-
+      FROM registry.access.redhat.com/ubi8/ubi-minimal
+      USER 0
+      RUN mkdir /vmware-vix-disklib-distrib && \
+        curl http://vddk-utils.openshift-mtv.svc.cluster.local:8080/VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz -L --output /vmware-vix-disklib-distrib/VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz
+      USER 1001
+      RUN mkdir -p /opt
+      ENTRYPOINT ["cp", "-r", "/vmware-vix-disklib-distrib", "/opt"]
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: registry.access.redhat.com/ubi8/ubi-minimal
+---
+{{ end }}

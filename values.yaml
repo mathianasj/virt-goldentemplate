@@ -25,7 +25,7 @@ mtv:
   vsphere:
     enabled: true
     sdkUrl: https://vshphere.example.com/sdk
-    vddkInitImage: registry.internal.svc/vddk/vddk:latest
+    vddkInitImage: image-registry.openshift-image-registry.svc:5000/openshift-mtv/vddk-build:latest
     user: sdkUser
     pass: sdkPass
 
