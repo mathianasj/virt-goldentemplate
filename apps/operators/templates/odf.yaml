@@ -27,4 +27,73 @@ spec:
   name: odf-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+---
+apiVersion: console.openshift.io/v1
+kind: ConsolePlugin
+metadata:
+  creationTimestamp: '2025-07-28T01:55:36Z'
+  generation: 1
+  managedFields:
+    - apiVersion: console.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:backend':
+            .: {}
+            'f:service':
+              .: {}
+              'f:basePath': {}
+              'f:name': {}
+              'f:namespace': {}
+              'f:port': {}
+            'f:type': {}
+          'f:displayName': {}
+          'f:i18n':
+            .: {}
+            'f:loadType': {}
+          'f:proxy': {}
+      manager: manager
+      operation: Update
+      time: '2025-07-28T01:55:36Z'
+  name: odf-console
+  resourceVersion: '62466'
+  uid: 5c344207-05ec-43d2-a219-ed753068ce63
+spec:
+  backend:
+    service:
+      basePath: /compatibility/
+      name: odf-console-service
+      namespace: openshift-storage
+      port: 9001
+    type: Service
+  displayName: ODF Plugin
+  i18n:
+    loadType: ''
+  proxy:
+    - alias: provider-proxy
+      authorization: UserToken
+      endpoint:
+        service:
+          name: ux-backend-proxy
+          namespace: openshift-storage
+          port: 8888
+        type: Service
+    - alias: rosa-prometheus
+      authorization: None
+      endpoint:
+        service:
+          name: prometheus
+          namespace: openshift-storage
+          port: 9339
+        type: Service
+    - alias: s3
+      authorization: None
+      endpoint:
+        service:
+          name: s3
+          namespace: openshift-storage
+          port: 443
+        type: Service
+---
 {{ end }}

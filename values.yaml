@@ -19,3 +19,15 @@ nmstate:
 
 nodehealth:
   enabled: true
+
+mtv:
+  enabled: true
+  vsphere:
+    enabled: true
+    sdkUrl: https://vshphere.example.com/sdk
+    vddkInitImage: registry.internal.svc/vddk/vddk:latest
+    user: sdkUser
+    pass: sdkPass
+
+imageregistry:
+  size: 500Gi

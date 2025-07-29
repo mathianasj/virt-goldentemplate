@@ -1,0 +1,40 @@
+{{ if .Values.mtv.enabled }}
+---
+kind: ForkliftController
+apiVersion: forklift.konveyor.io/v1beta1
+metadata:
+  name: forklift-controller
+  namespace: openshift-mtv
+spec:
+  feature_ui_plugin: 'true'
+  feature_validation: 'true'
+  feature_volume_populator: 'true'
+---
+apiVersion: forklift.konveyor.io/v1beta1
+kind: Provider
+metadata:
+  name: vsphere
+  namespace: openshift-mtv
+spec:
+  secret:
+    name: vsphere-75f72
+    namespace: openshift-mtv
+  settings:
+    sdkEndpoint: vcenter
+    vddkInitImage: '{{ .Values.mtv.vsphere.vddkInitImage }}'
+  type: vsphere
+  url: '{{ .Values.mtv.vsphere.sdkUrl }}'
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: vsphere-75f72
+  namespace: openshift-mtv
+data:
+  insecureSkipVerify: 'dHJ1ZQ=='
+  password: {{ .Values.mtv.vsphere.pass | b64enc }}
+  url: {{ .Values.mtv.vsphere.sdkUrl | b64enc }}
+  user: {{ .Values.mtv.vsphere.user | b64enc }}
+type: Opaque
+---
+{{ end }}

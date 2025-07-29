@@ -1,0 +1,16 @@
+{{ if .Values.mtv.enabled }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: vddk-download
+  namespace: openshift-mtv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+---
+{{ end }}
