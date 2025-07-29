@@ -9,7 +9,7 @@ oc run dummy --image image-registry.openshift-image-registry.svc:5000/openshift/
         "image": "image-registry.openshift-image-registry.svc:5000/openshift/httpd:latest",
         "volumeMounts": [
           {
-            "mountPath": "/mnt/data",
+            "mountPath": "/utils",
             "name": "my-volume"
           }
         ]
@@ -25,4 +25,5 @@ oc run dummy --image image-registry.openshift-image-registry.svc:5000/openshift/
     ]
   }
 }'
+
 oc cp ./VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz openshift-mtv/dummy:/mnt/data/VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz
