@@ -1,12 +1,12 @@
 #!/bin/bash
 
-oc run dummy --image centos/httpd-24-centos7 -n openshift-mtv --overrides='
+oc run dummy --image image-registry.openshift-image-registry.svc:5000/openshift/httpd:latest -n openshift-mtv --overrides='
 {
   "spec": {
     "containers": [
       {
         "name": "dummy",
-        "image": "centos/httpd-24-centos7",
+        "image": "image-registry.openshift-image-registry.svc:5000/openshift/httpd:latest",
         "volumeMounts": [
           {
             "mountPath": "/mnt/data",
@@ -25,4 +25,4 @@ oc run dummy --image centos/httpd-24-centos7 -n openshift-mtv --overrides='
     ]
   }
 }'
-oc cp VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz dummy:/mnt/data/ -n openshift-mtv
+oc cp ./VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz openshift-mtv/dummy:/mnt/data//mnt/data/VMware-vix-disklib-8.0.1-21562716.x86_64.tar.gz
